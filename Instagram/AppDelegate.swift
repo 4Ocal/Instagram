@@ -14,7 +14,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
 
-
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
         Parse.initialize(
@@ -24,6 +23,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 configuration.server = "https://parse-server-example-codepath.herokuapp.com/parse"
             })
         )
+        
+        if PFUser.current() != nil {
+            //print("There is a current user")
+            let storyboard = UIStoryboard(name: "Main", bundle: nil)
+            let vc = storyboard.instantiateViewController(withIdentifier: "TabBarController")
+            window?.rootViewController = vc
+        }
+        
         return true
     }
 
